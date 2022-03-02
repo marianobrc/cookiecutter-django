@@ -9,7 +9,8 @@ services:
   django:{% if cookiecutter.use_celery == 'y' %} &django{% endif %}
     build:
       context: .
-      dockerfile: ./compose/production/django/Dockerfile
+      dockerfile: ./compose/common/django/Dockerfile
+      target: python-run-stage-production
     image: {{ cookiecutter.project_slug }}_production_django
     platform: linux/x86_64
     depends_on:

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 volumes:
   {{ cookiecutter.project_slug }}_local_postgres_data: {}
@@ -8,7 +8,8 @@ services:
   django:{% if cookiecutter.use_celery == 'y' %} &django{% endif %}
     build:
       context: .
-      dockerfile: ./compose/local/django/Dockerfile
+      dockerfile: ./compose/common/django/Dockerfile
+      target: python-run-stage-local
     image: {{ cookiecutter.project_slug }}_local_django
     container_name: {{ cookiecutter.project_slug }}_local_django
     platform: linux/x86_64
